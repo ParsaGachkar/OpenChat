@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,10 +15,13 @@ namespace Data.Domain
         public DateTime CreationDateTime { get; set; }
         public DateTime? DeleteTime { get; set; }
         public Guid DeleterId { get; set; }
+        [ForeignKey("DeleterId")]
         public User Deleter { get; set; }
         [DataType(DataType.PhoneNumber)]
         [Required]
         public String PhoneNumber { get; set; }
+        [InverseProperty("User")]
+        public ICollection<UserChat> UserChats { get; set; }
 
     }
 }

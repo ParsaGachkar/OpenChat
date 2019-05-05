@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
@@ -15,8 +16,12 @@ namespace Data.Domain
         public DateTime CreationDateTime { get; set; }
         public DateTime? DeleteTime { get; set; }
         public Guid DeleterId { get; set; }
+        [ForeignKey("DeleterId")]
         public User Deleter { get; set; }
-        public ICollection<User> Users { get; set; }
+        [InverseProperty("Chat")]
+        public ICollection<UserChat> UserChats { get; set; }
+        public ICollection<User> Users => UserChats.Select(uc => uc.User).ToArray();
+        [InverseProperty("Chat")]
         public ICollection<Messege> Messeges { get; set; }
 
     }

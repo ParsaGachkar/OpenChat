@@ -14,12 +14,17 @@ namespace Data.Domain
         public DateTime CreationDateTime { get; set; }
         public DateTime? DeleteTime { get; set; }
         public Guid DeleterId { get; set; }
+        [ForeignKey("DeleterId")]
         public User Deleter { get; set; }
         [Required]
         public User SenderId { get; set; }
+        [ForeignKey("SenderId")]
         public User Sender { get; set; }
         [Required]
         public String Context { get; set; }
+        public Guid ChatId { get; set; }
+        [ForeignKey("ChatId")]
+        public Chat Chat { get; set; }
 
     }
 }
