@@ -14,7 +14,7 @@ namespace Data.Domain
         [Required]
         public DateTime CreationDateTime { get; set; }
         public DateTime? DeleteTime { get; set; }
-        public Guid DeleterId { get; set; }
+        public Guid? DeleterId { get; set; }
         [ForeignKey("DeleterId")]
         public User Deleter { get; set; }
         [DataType(DataType.PhoneNumber)]

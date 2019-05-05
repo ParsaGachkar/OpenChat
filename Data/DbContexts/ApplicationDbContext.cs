@@ -10,5 +10,13 @@ namespace Data.DbContexts
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<UserChat>().HasOne(u => u.User).WithMany(c => c.UserChats);
+            modelBuilder.Entity<UserChat>().HasOne(u => u.Chat).WithMany(c => c.UserChats);
+
+            modelBuilder.Entity<User>().HasOne(u => u.Deleter).WithOne().OnDelete(DeleteBehavior.SetNull);
+        }
     }
 }
