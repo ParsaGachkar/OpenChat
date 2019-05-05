@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
 using Data.Domain.Abstractions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Domain
 {
+    [Table("Chats")]
     public class Chat : IEntity<Guid>, IDeleteable<User, Guid>
     {
         [Key]

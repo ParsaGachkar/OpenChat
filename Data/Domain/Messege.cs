@@ -1,9 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Data.Domain.Abstractions;
 
 namespace Data.Domain
 {
+    [Table("Messeges")]
     public class Messege : IEntity<Guid>, IDeleteable<User, Guid>
     {
         [Key]
