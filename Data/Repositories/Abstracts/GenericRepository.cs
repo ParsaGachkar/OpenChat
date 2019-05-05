@@ -40,6 +40,7 @@ namespace Data.Repositories.Abstracts
         public async Task Update(TEntity entity)
         {
             dbContext.Update(entity);
+            await Task.CompletedTask;
         }
 
         public GenericRepository(ApplicationDbContext dbContext)
