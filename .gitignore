@@ -2,3 +2,8 @@
 /Data/obj
 /Core/obj
 /Test/obj
+/Web/appsettings.Development.json
+/Web/bin
+/Data/bin
+/Core/bin
+/Test/bin

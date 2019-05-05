@@ -1,3 +1,4 @@
+using Data.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web
 {
@@ -23,7 +26,10 @@ namespace Web
         {
             services.AddMvc()
                 .AddNewtonsoftJson();
-
+            var connection = Configuration.GetConnectionString("Default");
+            //DbContexts
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
+            //Services
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
