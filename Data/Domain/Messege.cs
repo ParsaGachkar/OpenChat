@@ -17,7 +17,7 @@ namespace Data.Domain
         [ForeignKey("DeleterId")]
         public User Deleter { get; set; }
         [Required]
-        public User SenderId { get; set; }
+        public Guid SenderId { get; set; }
         [ForeignKey("SenderId")]
         public User Sender { get; set; }
         [Required]
