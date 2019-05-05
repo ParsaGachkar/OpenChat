@@ -9,43 +9,49 @@ namespace Data.Repositories.Abstracts
 {
     public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>, new() where TKey : class
     {
-        private readonly ApplicationDbContext dbContext;
+        private ApplicationDbContext dbContext;
 
-        public async Task Commit()
+        public virtual async Task Commit()
         {
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Create(TEntity entity)
+        public virtual async Task Create(TEntity entity)
         {
             await dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public async Task Delete(TEntity entity)
+        public virtual async Task Delete(TEntity entity)
         {
             dbContext.Set<TEntity>().Remove(entity);
             await Task.CompletedTask;
         }
 
-        public async Task<TEntity> Read(TKey Id)
+        public virtual async Task<TEntity> Read(TKey Id)
         {
             return await (dbContext.Set<TEntity>().FindAsync(Id));
         }
 
-        public async Task<ICollection<TEntity>> ReadAll()
+        public virtual async Task<ICollection<TEntity>> ReadAll()
         {
             return await (dbContext.Set<TEntity>().ToArrayAsync());
         }
 
-        public async Task Update(TEntity entity)
+        public virtual async Task Update(TEntity entity)
         {
             dbContext.Update(entity);
             await Task.CompletedTask;
         }
 
-        public GenericRepository(ApplicationDbContext dbContext)
+        public async Task SetDbContext(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+            await Task.CompletedTask;
+        }
+
+        public GenericRepository()
+        {
+
         }
     }
 }
