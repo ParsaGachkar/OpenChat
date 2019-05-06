@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories.Abstracts
 {
-    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>, new() where TKey : class
+    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
     {
         private ApplicationDbContext dbContext;
 
