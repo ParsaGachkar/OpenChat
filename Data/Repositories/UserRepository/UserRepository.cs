@@ -4,7 +4,7 @@ using Data.Repositories.Abstracts;
 
 namespace Data.Repositories.UserRepository
 {
-    public interface IUserRepository : IGenericRepository<User, Guid>
+    public class UserRepository : GenericRepository<User, Guid>, IUserRepository
     {
 
     }
