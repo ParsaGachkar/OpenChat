@@ -15,7 +15,7 @@ namespace Data.UnitOfWork
         {
             await dbContext.SaveChangesAsync();
         }
-        public async Task<TRepository> GetRepository<TRepository, TEntity, TKey>() where TRepository : GenericRepository<TEntity, TKey>, new() where TEntity : class, IEntity<TKey>, new() where TKey : class, new()
+        public async Task<TRepository> GetRepository<TRepository, TEntity, TKey>() where TRepository : GenericRepository<TEntity, TKey>, new() where TEntity : class, IEntity<TKey>, new()
         {
             TRepository repository = new TRepository();
             await repository.SetDbContext(dbContext);
