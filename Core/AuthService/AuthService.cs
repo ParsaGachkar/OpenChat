@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Core.AuthService.Config;
 using Core.AuthService.Resources;
+using Core.SmsService;
 using Core.UserService;
 using Microsoft.Extensions.Options;
 
@@ -17,15 +18,9 @@ namespace Core.AuthService
 
         private readonly IUserService _userService;
         private readonly IMapper mapper;
-
+        private readonly ISmsService smsService;
         private readonly AuthServiceConfig _authServiceConfig;
 
-        public AuthService(IUserService userService, IMapper mapper, IOptions<AuthServiceConfig> authServiceConfig)
-        {
-            _authServiceConfig = authServiceConfig.Value;
-            this.mapper = mapper;
-            _userService = userService;
-        }
 
         public async Task<UserGetResponseResource> GetUser(Resources.UserGetResource model)
         {
@@ -34,8 +29,9 @@ namespace Core.AuthService
 
         public async Task SendConfirmation(UserSendConfiramtionResource model)
         {
-            phoneCodeDictionary.Add(model.PhoneNumber, random.Next(1000, 9999));
-            await Task.CompletedTask;
+            int code = random.Next(1000, 9999);
+            phoneCodeDictionary.Add(model.PhoneNumber, code);
+            await smsService.Send(new SmsService.Resources.SmsResource(model.PhoneNumber, $"Your Verification Code is {code}"));
         }
 
         public async Task<UserVerifyResponseResource> VerifyConfirmation(UserVerifyResource model)
@@ -50,6 +46,13 @@ namespace Core.AuthService
             }
             await Task.CompletedTask;
             throw new Exceptions.LoginFaildExeption();
+        }
+        public AuthService(IUserService userService, IMapper mapper, IOptions<AuthServiceConfig> authServiceConfig, ISmsService smsService)
+        {
+            _authServiceConfig = authServiceConfig.Value;
+            this.mapper = mapper;
+            this.smsService = smsService;
+            _userService = userService;
         }
     }
 }
