@@ -15,7 +15,7 @@ namespace Core.AuthService.Resources
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(
                     new Claim[]{
-                        new Claim("PhoneNumber",model.PhoneNumber)
+                        new Claim(CustomClaim.PhoneNumber,model.PhoneNumber)
                     }
                 ),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Key)), SecurityAlgorithms.HmacSha256Signature)

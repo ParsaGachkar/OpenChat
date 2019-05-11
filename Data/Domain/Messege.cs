@@ -21,6 +21,10 @@ namespace Data.Domain
         [ForeignKey("SenderId")]
         public User Sender { get; set; }
         [Required]
+        public Guid ReciverId { get; set; }
+        [ForeignKey("ReciverId")]
+        public User Reciver { get; set; }
+        [Required]
         public String Context { get; set; }
         public Guid ChatId { get; set; }
         [ForeignKey("ChatId")]

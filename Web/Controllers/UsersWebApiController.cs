@@ -6,14 +6,17 @@ using Core.AuthService.Resources;
 using Core.UserService;
 using Microsoft.AspNetCore.Mvc;
 using Core.UserService.Resources;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
     [Route("/api/user")]
+    [Authorize]
     public class UsersWebApiController : Controller
     {
 
         [HttpGet("/auth/{phone}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserAuthStart(string phone)
         {
             await _authService.SendConfirmation(new UserSendConfiramtionResource(phone));
@@ -24,6 +27,7 @@ namespace Web.Controllers
             return BadRequest();
         }
         [HttpGet("/auth/{phone}/{code}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserAuthVerify(string phone, int code)
         {
             var result = await _authService.VerifyConfirmation(new UserVerifyResource(phone, code));

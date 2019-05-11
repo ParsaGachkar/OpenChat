@@ -6,10 +6,12 @@ using Core.ChatService.Resources;
 using Core.UserService.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Core.UserService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
     [Route("/api/chat")]
+    [Authorize]
     public class ChatWebApiController : Controller
     {
         [HttpGet]
