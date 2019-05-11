@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Data.Domain;
@@ -7,20 +8,19 @@ namespace Data.Repositories.MessegeRepository
 {
     public class MessegeRepository : GenericRepository<Messege, Guid>, IMessegeRepository
     {
-        //TODO: Implement This
         public Messege Read(object id)
         {
             throw new NotImplementedException();
         }
 
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Chat>> GetChatsFor(User model)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Chat>> GetChatsFor(User model)
         {
-            throw new NotImplementedException();
+            return (await dbContext.Users.FindAsync(model.Id)).UserChats.Select(c => c.Chat).ToArray();
         }
 
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Messege>> MessegesFor(Chat model)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Messege>> MessegesFor(Chat model)
         {
-            throw new NotImplementedException();
+            return (await dbContext.Set<Chat>().FindAsync(model.Id)).Messeges;
         }
 
         public Task SeenChat(Messege messege)
@@ -28,9 +28,9 @@ namespace Data.Repositories.MessegeRepository
             throw new NotImplementedException();
         }
 
-        public Task SendMessege(Messege messege)
+        public async Task SendMessege(Messege messege)
         {
-            throw new NotImplementedException();
+            await this.Create(messege);
         }
     }
 }
