@@ -32,7 +32,7 @@ namespace Web.Controllers
             );
             return base.Ok(chats);
         }
-        [HttpGet]
+        [HttpGet("messeges")]
         public async Task<IActionResult> GetMesseges([FromBody] ChatReadResource model)
         {
             if (!ModelState.IsValid)

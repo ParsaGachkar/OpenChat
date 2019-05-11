@@ -15,7 +15,7 @@ namespace Core.SmsService
         {
             logger.LogInformation($"Sending '{model.Context}' to '{model.PhoneNumber}'");
             await Task.CompletedTask;
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

@@ -15,7 +15,9 @@ namespace Web.Controllers
     public class UsersWebApiController : Controller
     {
 
-        [HttpGet("/auth/{phone}")]
+        [HttpGet("auth/{phone}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [AllowAnonymous]
         public async Task<IActionResult> GetUserAuthStart(string phone)
         {
@@ -26,7 +28,7 @@ namespace Web.Controllers
             }
             return BadRequest();
         }
-        [HttpGet("/auth/{phone}/{code}")]
+        [HttpGet("auth/{phone}/{code}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetUserAuthVerify(string phone, int code)
         {
@@ -40,7 +42,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserInfo()
         {
-            var result = await _userService.ReadUserByPhone((HttpContext.User.Claims.FirstOrDefault(c => c.Type == "phone")?.Value) ?? "");
+            var result = await _userService.ReadUserByPhone((HttpContext.User.Claims.FirstOrDefault(c => c.Type == CustomClaim.PhoneNumber)?.Value) ?? "");
             if (result == null)
             {
                 return BadRequest();
@@ -58,7 +60,7 @@ namespace Web.Controllers
             await _userService.EditUser(model);
             return Ok();
         }
-        [HttpGet("/{phone}")]
+        [HttpGet("{phone}")]
         public async Task<IActionResult> GetUserInfoSpecific(string phone)
         {
             var result = await _userService.ReadUserByPhone(phone ?? "");

@@ -16,7 +16,11 @@ namespace Data.DbContexts
             modelBuilder.Entity<UserChat>().HasOne(u => u.User).WithMany(c => c.UserChats);
             modelBuilder.Entity<UserChat>().HasOne(u => u.Chat).WithMany(c => c.UserChats);
 
-            modelBuilder.Entity<User>().HasOne(u => u.Deleter).WithOne().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<User>().HasOne(u => u.Deleter).WithOne().OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Messege>().HasOne(m => m.Sender).WithMany().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Messege>().HasOne(m => m.Reciver).WithMany().OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
