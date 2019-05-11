@@ -39,6 +39,12 @@ namespace Core.UserService
         {
             return mapper.Map<ReadUserResource>(await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).Read(Id));
         }
+
+        public async Task<ReadUserResource> ReadUserByPhone(string phone)
+        {
+            return mapper.Map<ReadUserResource>(await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).ReadByPhone(phone));
+        }
+
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 

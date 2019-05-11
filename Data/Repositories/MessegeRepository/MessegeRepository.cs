@@ -7,6 +7,7 @@ namespace Data.Repositories.MessegeRepository
 {
     public class MessegeRepository : GenericRepository<Messege, Guid>, IMessegeRepository
     {
+        //TODO: Implement This
         public Messege Read(object id)
         {
             throw new NotImplementedException();

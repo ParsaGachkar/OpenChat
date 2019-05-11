@@ -10,6 +10,7 @@ namespace Core.UserService
     {
         Task CreateUser(CreateUserResource model);
         Task<ReadUserResource> ReadUser(Guid Id);
+        Task<ReadUserResource> ReadUserByPhone(string phone);
         Task<ICollection<ReadUserResource>> ReadAllUsers();
         Task EditUser(EditUserResource model);
         Task DeleteUser(DeleteUserResource model);

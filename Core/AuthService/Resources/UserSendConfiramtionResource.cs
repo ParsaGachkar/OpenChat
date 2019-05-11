@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Core.AuthService
 {
 
@@ -5,7 +7,14 @@ namespace Core.AuthService
     {
         public class UserSendConfiramtionResource
         {
-            public string PhoneNumber;
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            public string PhoneNumber { get; set; }
+            public UserSendConfiramtionResource(string phoneNumber)
+            {
+                this.PhoneNumber = phoneNumber;
+
+            }
         }
     }
 }

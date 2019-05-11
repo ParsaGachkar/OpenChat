@@ -1,4 +1,9 @@
+using Core.AuthService;
+using Core.ChatService;
+using Core.SmsService;
+using Core.UserService;
 using Data.DbContexts;
+using Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +31,12 @@ namespace Web
             //DbContexts
             var connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Web")));
+            //Services
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<ISmsService, SmsService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IChatService, ChatService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
