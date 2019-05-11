@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Data.Domain;
 using Data.Repositories.Abstracts;
 
@@ -17,6 +18,16 @@ namespace Data.Repositories.MessegeRepository
         }
 
         public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Messege>> MessegesFor(Chat model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SeenChat(Messege messege)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendMessege(Messege messege)
         {
             throw new NotImplementedException();
         }

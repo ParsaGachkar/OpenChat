@@ -1,8 +1,8 @@
 using System;
 
-namespace Core.ChatService.Resources
+namespace Core.UserService.Resources
 {
-    public class ChatReadResource
+    public class ReadUserResource
     {
         public Guid Id { get; internal set; }
     }
