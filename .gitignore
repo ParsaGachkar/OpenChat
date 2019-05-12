@@ -7,3 +7,5 @@
 /Data/bin
 /Core/bin
 /Test/bin
+/Web/ClientApp/private
+/Web/ClientApp/node_modules/@angular/router/src/config.d.ts

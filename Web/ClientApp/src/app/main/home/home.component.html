@@ -1,0 +1,111 @@
+<nb-layout dir="rtl">
+
+  <nb-layout-header>
+    <span style="font-weight: 800; padding: 1em">
+      اُپن چت
+    </span>
+  </nb-layout-header>
+  <nb-layout-column>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm-12 col-md-6">
+          <nb-card>
+            <div style="padding: 1.5em; font-weight: 200; font-size: 1.5em">
+              <h1 style="font-weight: 700;">اُپن چت چیست؟</h1>
+              <p>اُپن چت یک پروژه متن باز چت بر پایه ASP.Net Core، Angular، SignlarR و MySql است. Back-End این سیستم
+                توسط Docker در سرور
+                های ابری Liara.ir میزبانی شده است.</p>
+              <p>
+                در نسخه دسکتاپ این پروژه از تکنولوژی Electron Js به همراه DotNet Core و Angular استفاده شده. مزیت
+                استفاده از این روش
+                پشتیبانی همزمان از سیستم عامل های ویندوز، لینوکس و مک، به حداقل رساندن زمان توسئه و استفاده از یک بیس کد
+                برای سهولت
+                مدیریت بروزرسانی ها در تمام سیستم عامل هامیباشد.
+              </p>
+              <p>
+                برای نرم افزار موبایل از flutter استفاده شده. مزیت استفاده از این تکنولوژی پشتیبانی همزمان از Android و
+                iOS در حالی است
+                که هر دو نرم‌افزار کاملا native، روان و کم حجم هستند. به حداقل رساندن زمان توسئه و استفاده از یک بیس کد
+                برای سهولت
+                مدیریت بروزرسانی ها در هر دو سیستم عامل از مزایای دیگر این تکنولوژی است.
+              </p>
+            </div>
+          </nb-card>
+        </div>
+        <div class="col-sm-12 col-md-6">
+
+          <nb-card>
+            <div style="padding: 0.5em; font-size: 1.5em">
+              <button class="btn btn-dark btn-block btn-lg">
+                <b>
+                  <i class="fab fa-github fa-2x" style="vertical-align: middle;"></i> دسترسی به سورس کد
+                </b>
+              </button>
+              <button class="btn btn-primary btn-block btn-lg" (click)="GotoWebApp()">
+                <b>
+                  <i class="fab fa-angular fa-2x" style="vertical-align: middle;"></i> ورود به نسخه وب
+                </b>
+              </button>
+              <br />
+              <div class="btn-group btn-group-sm col-12" dir="ltr">
+                <button class="btn btn-dark">
+                  <div dir="rtl">
+                    <div style="align-content: center;">
+                      <i class="fab fa-apple fa-3x"></i>
+                    </div>
+                    دریافت نسخه MacOs نرم افزار
+                  </div>
+                </button>
+                <button class="btn btn-secondary">
+                  <div dir="rtl">
+                    <div style="align-content: center;">
+                      <i class="fab fa-windows fa-3x"></i>
+                    </div>
+                    دریافت نسخه Microsoft Windows نرم افزار
+                  </div>
+                </button>
+                <button class="btn btn-light">
+                  <div dir="rtl">
+                    <div style="align-content: center;">
+                      <i class="fab fa-linux fa-3x"></i>
+                    </div>
+                    دریافت نسخه Linux نرم افزار
+                  </div>
+                </button>
+
+
+
+              </div>
+              <br />
+              <div class="btn-group btn-group-lg col-12" dir="ltr" style="padding-top: 1em;">
+                <button class="btn btn-dark">
+                  <div dir="rtl">
+                    <i class="fab fa-apple fa-2x" style="vertical-align: middle"></i>
+                    دانلود نسخه iOS
+                  </div>
+                </button>
+                <button class="btn btn-light">
+                  <div dir="rtl">
+                    <i class="fab fa-android fa-2x" style="vertical-align: middle"></i>
+                    دانلود نسخه Android
+                  </div>
+                </button>
+              </div>
+            </div>
+
+
+          </nb-card>
+        </div>
+
+      </div>
+    </div>
+  </nb-layout-column>
+
+
+  <nb-layout-footer fixed>
+    <!-- Insert footer here -->
+  </nb-layout-footer>
+
+</nb-layout>

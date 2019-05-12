@@ -1,1 +1,28 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+;
+
 /* You can add global styles to this file, and also import other style files */
+body * {
+  font-family: 'Anjoman';
+}
+
+p {
+  padding: 0.5em;
+  text-align: justify;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Anjoman' !important;
+}
