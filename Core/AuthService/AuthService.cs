@@ -33,7 +33,12 @@ namespace Core.AuthService
         public async Task SendConfirmation(UserSendConfiramtionResource model)
         {
             int code = random.Next(1000, 9999);
-            phoneCodeDictionary.Add(model.PhoneNumber, code);
+            if (!phoneCodeDictionary.ContainsKey(model.PhoneNumber))
+                phoneCodeDictionary.Add(model.PhoneNumber, code);
+            else
+            {
+                phoneCodeDictionary[model.PhoneNumber] = code;
+            }
             await smsService.Send(new SmsService.Resources.SmsResource(model.PhoneNumber, $"Your Verification Code is {code}"));
         }
 

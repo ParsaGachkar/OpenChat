@@ -7,6 +7,9 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbCardModule, NbLayoutDirection, NbButtonModule } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
+import { ReactiveFormsModule } from '@angular/forms';
+import { PersianPipesModule } from 'angular2-persian-pipes';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,7 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
     NbSidebarModule.forRoot(),
     NbCardModule,
     NbButtonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
