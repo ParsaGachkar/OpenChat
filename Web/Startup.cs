@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Core.AuthService;
 using Core.AuthService.Config;
@@ -149,6 +150,7 @@ namespace Web
                 spa.Options.SourcePath = "ClientApp/";
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = TimeSpan.FromMinutes(5);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

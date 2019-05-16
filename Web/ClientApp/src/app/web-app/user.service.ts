@@ -8,14 +8,14 @@ import { EditUserResource } from './EditUserResource';
 })
 export class UserService {
   constructor(private http: HttpClient) {
-    this.Token = localStorage.getItem('auth-token');
-    if (this.Token === null) {
-      localStorage.setItem('auth-token', '');
-      this.Token = '';
-    }
+    this.LoadToken();
   }
   public Token = '';
+  LoadToken() {
+    this.Token = localStorage.getItem('auth-token');
+  }
   public GetAuthHeader() {
+    console.log(`Token is ${this.Token}`);
     return { headers: new HttpHeaders({ Authorization: `Bearer ${this.Token}` }) };
   }
   GetUserAuthStart(phone: string, Done?: () => void, Error?: (e: any) => void) {
@@ -32,8 +32,10 @@ export class UserService {
   GetUserAuthVerify(phone: string, code: number, Done?: (result: UserVerifyResponseResource) => void, Error?: (e: any) => void) {
     this.http.get(`/api/user/auth/${phone}/${code}`).subscribe(data => {
       const parsedData = data as UserVerifyResponseResource;
-      this.Token = parsedData.Token;
-      localStorage.setItem('auth-token', this.Token);
+      console.log(JSON.stringify(parsedData));
+      this.Token = parsedData.token;
+      console.log(this.Token);
+      this.SaveToken();
       if (Done) {
         Done(parsedData);
       }
@@ -43,9 +45,16 @@ export class UserService {
       }
     });
   }
+  private SaveToken() {
+    localStorage.setItem('auth-token', this.Token);
+  }
+
   GetUserInfo(Done?: (result: ReadUserResource) => void, Error?: (e: any) => void) {
     this.http.get(`/api/user/`, this.GetAuthHeader()).subscribe(data => {
+
       const parsedData = data as ReadUserResource;
+      console.log(JSON.stringify(data));
+      console.log(JSON.stringify(parsedData));
       if (Done) {
         Done(parsedData);
       }
@@ -78,5 +87,10 @@ export class UserService {
         Error(error);
       }
     });
+  }
+
+  ResetToken() {
+    localStorage.setItem('auth-token', '');
+    this.Token = '';
   }
 }

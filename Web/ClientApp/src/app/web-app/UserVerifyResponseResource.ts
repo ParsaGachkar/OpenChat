@@ -1,3 +1,3 @@
 export interface UserVerifyResponseResource {
-  Token: string;
+  token: string;
 }

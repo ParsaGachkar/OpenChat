@@ -1,3 +1,3 @@
 export interface ChatReadResource {
-    Id: string;
+  id: string;
 }

@@ -1,5 +1,5 @@
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbLayoutModule, NbCardModule } from '@nebular/theme';
+import { NbLayoutModule, NbCardModule, NbUserModule, NbSidebarModule, NbSearchModule, NbChatModule } from '@nebular/theme';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +16,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
   imports: [
     CommonModule,
     WebAppRoutingModule,
-    NbLayoutModule, NbCardModule, ReactiveFormsModule, FormsModule,
+    NbLayoutModule, NbCardModule, ReactiveFormsModule, FormsModule, NbUserModule, NbSidebarModule, NbSearchModule,
+    NbChatModule,
     HttpClientModule,
     NgxCaptchaModule
   ]

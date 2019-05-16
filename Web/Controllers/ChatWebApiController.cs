@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Core.UserService.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Core.UserService;
 using Microsoft.AspNetCore.Authorization;
+using Core.AuthService.Resources;
 
 namespace Web.Controllers
 {
@@ -24,12 +26,12 @@ namespace Web.Controllers
                     (
                         (
                             await _userService.ReadUserByPhone(
-                                HttpContext.User.Claims.FirstOrDefault(c => c.Type == "phone")?.Value ?? ""
+                                HttpContext.User.Claims.FirstOrDefault(c => c.Type == CustomClaim.PhoneNumber)?.Value ?? ""
                             )
                         ).Id
                     )
                 )
-            );
+            ) ?? new Collection<ChatReadResource>();
             return base.Ok(chats);
         }
         [HttpGet("messeges")]

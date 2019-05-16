@@ -1,3 +1,3 @@
 export interface ReadUserResource {
-    Id: string;
+  id: string;
 }
