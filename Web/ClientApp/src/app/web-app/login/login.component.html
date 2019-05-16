@@ -20,28 +20,49 @@
               </div>
 
               <br>
+
+
               <button type="submit" class="btn btn-block btn-primary btn-lg"
                 [disabled]="phoneLoginForm.invalid">ورود</button>
             </form>
             <div class="text-center" *ngIf="state == LoginState.SendingCode || state == LoginState.VerifyingCode">
               <i class="fas fa-spinner-third fa-spin fa-5x"></i>
             </div>
-            <form *ngIf="state == LoginState.EnterCode" (ngSubmit)="submitPhone()" style="padding: 1em;"
+            <form *ngIf="state == LoginState.EnterCode" (ngSubmit)="submitCode()" style="padding: 1em;"
               [formGroup]="codeVerificationForm">
               <input class="form-control form-control-lg" placeholder="کد" formControlName="code">
-              <div class="text-danger" *ngIf="phoneLoginForm.invalid" style="padding-top: 1em;">
+              <div class="text-danger" *ngIf="codeVerificationForm.invalid" style="padding-top: 1em;">
                 <i class="fal fa-exclamation-triangle fa-3x"
                   style="float: right; clear: both; vertical-align: middle"></i>
 
                 <p>
-                  شماره موبایل باید به صورت ۱۱ رقمی (09120000000) وارد شود!
+                  کد ارسال شده چهار رقمی است!
                 </p>
               </div>
 
               <br>
+
+
               <button type="submit" class="btn btn-block btn-primary btn-lg"
-                [disabled]="phoneLoginForm.invalid">ورود</button>
+                [disabled]="codeVerificationForm.invalid">ورود</button>
             </form>
+            <div style="padding: 1em;" class="text-center text-danger"
+              *ngIf="state==LoginState.Error || state==LoginState.InvalidCode">
+              <i class='fal fa-times-circle fa-3x'></i>
+              <p class="text-center text-danger">
+                خطایی رخ داده است
+              </p>
+              <button (click)="retry()" class='btn btn-block btn-link'>
+                <i class='fal fa-redo'></i>
+                دوباره امتحان کنید!</button>
+            </div>
+            <div style="padding: 1em;" class="text-center text-success" *ngIf="state==LoginState.Success">
+              <i class='fal fa-check-circle fa-3x'></i>
+              <p class="text-center text-success">
+                شما با موفقیت وارد سیستم شدید.
+              </p>
+
+            </div>
           </nb-card>
         </div>
         <div class="col-sm-12 col-md-8">

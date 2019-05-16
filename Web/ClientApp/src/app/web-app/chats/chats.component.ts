@@ -12,7 +12,7 @@ export class ChatsComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    if (UserService.Token === '') {
+    if (this.userService.Token === '') {
       this.router.navigate(['/WebApp/Login']);
     }
   }

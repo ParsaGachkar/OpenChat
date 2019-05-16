@@ -8,6 +8,7 @@ import { WebAppRoutingModule } from './web-app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ChatsComponent } from './chats/chats.component';
 import { ChatComponent } from './chat/chat.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ChatComponent } from './chat/chat.component';
     WebAppRoutingModule,
     NbLayoutModule, NbCardModule, ReactiveFormsModule, FormsModule,
     HttpClientModule,
+    NgxCaptchaModule
   ]
 })
 export class WebAppModule { }

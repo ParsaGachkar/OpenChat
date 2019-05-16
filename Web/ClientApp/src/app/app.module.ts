@@ -10,7 +10,7 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { ReactiveFormsModule } from '@angular/forms';
 import { PersianPipesModule } from 'angular2-persian-pipes';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxCaptchaModule } from 'ngx-captcha';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     NbCardModule,
     NbButtonModule,
     HttpClientModule,
+NgxCaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

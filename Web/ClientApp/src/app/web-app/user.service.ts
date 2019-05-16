@@ -7,10 +7,16 @@ import { EditUserResource } from './EditUserResource';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) { }
-  public static Token = '';
-  public static GetAuthHeader() {
-    return { headers: new HttpHeaders({ Authorization: `Bearer ${UserService.Token}` }) };
+  constructor(private http: HttpClient) {
+    this.Token = localStorage.getItem('auth-token');
+    if (this.Token === null) {
+      localStorage.setItem('auth-token', '');
+      this.Token = '';
+    }
+  }
+  public Token = '';
+  public GetAuthHeader() {
+    return { headers: new HttpHeaders({ Authorization: `Bearer ${this.Token}` }) };
   }
   GetUserAuthStart(phone: string, Done?: () => void, Error?: (e: any) => void) {
     this.http.get(`/api/user/auth/${phone}`).subscribe(data => {
@@ -26,7 +32,8 @@ export class UserService {
   GetUserAuthVerify(phone: string, code: number, Done?: (result: UserVerifyResponseResource) => void, Error?: (e: any) => void) {
     this.http.get(`/api/user/auth/${phone}/${code}`).subscribe(data => {
       const parsedData = data as UserVerifyResponseResource;
-      UserService.Token = parsedData.Token;
+      this.Token = parsedData.Token;
+      localStorage.setItem('auth-token', this.Token);
       if (Done) {
         Done(parsedData);
       }
@@ -37,7 +44,7 @@ export class UserService {
     });
   }
   GetUserInfo(Done?: (result: ReadUserResource) => void, Error?: (e: any) => void) {
-    this.http.get(`/api/user/`, UserService.GetAuthHeader()).subscribe(data => {
+    this.http.get(`/api/user/`, this.GetAuthHeader()).subscribe(data => {
       const parsedData = data as ReadUserResource;
       if (Done) {
         Done(parsedData);
@@ -50,7 +57,7 @@ export class UserService {
   }
 
   SetUserInfo(model: EditUserResource, Done?: () => void, Error?: (e: any) => void) {
-    this.http.get(`/api/user/`, UserService.GetAuthHeader()).subscribe(data => {
+    this.http.get(`/api/user/`, this.GetAuthHeader()).subscribe(data => {
       if (Done) {
         Done();
       }
@@ -61,7 +68,7 @@ export class UserService {
     });
   }
   GetUserInfoSpecific(phone: string, Done?: (result: ReadUserResource) => void, Error?: (e: any) => void) {
-    this.http.get(`/api/user/${phone}`, UserService.GetAuthHeader()).subscribe(data => {
+    this.http.get(`/api/user/${phone}`, this.GetAuthHeader()).subscribe(data => {
       const parsedData = data as ReadUserResource;
       if (Done) {
         Done(parsedData);
