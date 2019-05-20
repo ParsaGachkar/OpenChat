@@ -61,7 +61,7 @@ namespace Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //DbContexts
             var connectionString = Configuration.GetConnectionString("Default");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Web")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("TestDb"));
             //Services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAuthService, AuthService>();

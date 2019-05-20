@@ -34,14 +34,14 @@ namespace Web.Controllers
             ) ?? new Collection<ChatReadResource>();
             return base.Ok(chats);
         }
-        [HttpGet("messeges")]
-        public async Task<IActionResult> GetMesseges([FromBody] ChatReadResource model)
+        [HttpGet("messeges/{id}")]
+        public async Task<IActionResult> GetMesseges(Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            return Ok(await _chatService.GetMesseges(model));
+            return Ok(await _chatService.GetMesseges(new ChatReadResource(){Id = id}));
         }
         [HttpPost]
         public async Task<IActionResult> SendMessege([FromBody] MessegeWriteResource model)

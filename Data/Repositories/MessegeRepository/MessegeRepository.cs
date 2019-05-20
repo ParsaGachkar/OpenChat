@@ -20,9 +20,9 @@ namespace Data.Repositories.MessegeRepository
             return (await dbContext.Users.FindAsync(model.Id)).UserChats.Select(c => c.Chat).ToArray() ?? new Chat[] { };
         }
 
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Messege>> MessegesFor(Chat model)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Messege>> MessegesFor(Guid id)
         {
-            return (await dbContext.Set<Chat>().FindAsync(model.Id)).Messeges;
+            return (await dbContext.Set<Chat>().FindAsync(id)).Messeges;
         }
 
         public Task SeenChat(Messege messege)
