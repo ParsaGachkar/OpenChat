@@ -34,7 +34,7 @@ namespace Data.Repositories.Abstracts
 
         public virtual async Task<ICollection<TEntity>> ReadAll()
         {
-            return await (dbContext.Set<TEntity>().ToArrayAsync());
+            return await (dbContext.Set<TEntity>().ToListAsync());
         }
 
         public virtual async Task Update(TEntity entity)

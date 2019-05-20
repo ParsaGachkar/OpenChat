@@ -13,13 +13,14 @@ namespace Data.DbContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<UserChat>().HasOne(u => u.User).WithMany(c => c.UserChats);
+            modelBuilder.Entity<User>().HasMany<UserChat>(u=>u.UserChats).WithOne(u=>u.User);
+
+            modelBuilder.Entity<UserChat>().HasOne<User>(uc=>uc.User).WithMany(u=>u.UserChats);
             modelBuilder.Entity<UserChat>().HasOne(u => u.Chat).WithMany(c => c.UserChats);
 
-            modelBuilder.Entity<User>().HasOne(u => u.Deleter).WithOne().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Chat>().HasMany(c=>c.UserChats).WithOne(c=>c.Chat);
 
-            modelBuilder.Entity<Messege>().HasOne(m => m.Sender).WithMany().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Messege>().HasOne(m => m.Reciver).WithMany().OnDelete(DeleteBehavior.Restrict);
+            
 
         }
     }

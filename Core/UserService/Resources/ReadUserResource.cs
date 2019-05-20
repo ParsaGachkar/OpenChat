@@ -10,5 +10,6 @@ namespace Core.UserService.Resources
         }
 
         public Guid Id { get; internal set; }
+        public string PhoneNumber {get;set;}
     }
 }

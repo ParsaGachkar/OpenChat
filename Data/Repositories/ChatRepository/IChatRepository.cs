@@ -8,7 +8,7 @@ namespace Data.Repositories.ChatRepository
     public interface IChatRepository : IGenericRepository<Chat, Guid>
     {
         
-        Task CreateChatFor(Guid senderId, Guid reciverId);
+        Task<Chat> CreateChatFor(Guid senderId, Guid reciverId);
         Task<Chat> GetChatFor(Guid senderId, Guid reciverId);
     }
 }

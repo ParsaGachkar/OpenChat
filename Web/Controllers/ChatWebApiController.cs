@@ -22,16 +22,12 @@ namespace Web.Controllers
             var chats =
             (await _chatService.GetChats
                 (
-                    new ReadUserResource
-                    (
-                        (
-                            await _userService.ReadUserByPhone(
-                                HttpContext.User.Claims.FirstOrDefault(c => c.Type == CustomClaim.PhoneNumber)?.Value ?? ""
-                            )
-                        ).Id
-                    )
+                    new ReadChatResource(){
+                        currentUserId = 
+                        (await _userService.ReadUserByPhone(User.Claims.First(c=>c.Type == CustomClaim.PhoneNumber).Value)).Id,
+                    }
                 )
-            ) ?? new Collection<ChatReadResource>();
+            );
             return base.Ok(chats);
         }
         [HttpGet("messeges/{id}")]

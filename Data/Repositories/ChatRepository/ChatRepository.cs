@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,19 @@ namespace Data.Repositories.ChatRepository
     {
         public async Task<Chat> GetChatFor(Guid senderId, Guid reciverId)
         {
-            var chat = await dbContext.Set<Chat>().Include(c => c.UserChats).Include(c => c.Users)
-            .FirstOrDefaultAsync(c => c.Users.Any(u => u.Id == senderId)
-                && c.Users.Any(u => u.Id == reciverId));
+            var chat = (await dbContext.Set<Chat>().Include(c=>c.UserChats).ThenInclude(uc=>uc.User)
+            .FirstOrDefaultAsync(c=>c.UserChats.Any(uc=>uc.UserId == senderId) && c.UserChats.Any(uc=>uc.UserId == reciverId)));
             return chat;
         }
 
-        public async Task CreateChatFor(Guid senderId, Guid reciverId)
+        public async Task<ICollection<Chat>> GetChats(Guid currentUserId)
+        {
+             var chat = await dbContext.Set<UserChat>().Include(uc=>uc.Chat).Include(uc=>uc.User)
+            .Where(c => c.User.Id == currentUserId).Select(uc=>uc.Chat).Distinct().ToListAsync();
+            return chat;
+        }
+
+        public async Task<Chat> CreateChatFor(Guid senderId, Guid reciverId)
         {
 
             Chat chat = new Chat()
@@ -28,13 +35,14 @@ namespace Data.Repositories.ChatRepository
             };
             UserChat sender = new UserChat() { UserId = senderId, ChatId = chat.Id, Id = Guid.NewGuid() ,User = dbContext.Users.Find(senderId)};
             UserChat reciver = new UserChat() { UserId = reciverId, ChatId = chat.Id, Id = Guid.NewGuid(), User = dbContext.Users.Find(reciverId) };
-            chat.UserChats = new UserChat[]{
+            chat.UserChats = new Collection<UserChat>{
                     sender,
                     reciver
                 };
-            chat.Messeges = new Messege[] { };
+            chat.Messeges = new Collection<Messege>().ToList();
             await base.Create(chat
             );
+            return chat;
         }
 
         public IEnumerable<object> GetChatFor(object currentUserId, object selectedUserId)

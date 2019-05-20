@@ -3,67 +3,60 @@ using System;
 using Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190511195149_initial")]
-    partial class initial
+    [Migration("20190520131109_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
             modelBuilder.Entity("Data.Domain.Chat", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
                     b.Property<DateTime>("CreationDateTime");
 
-                    b.Property<DateTime?>("DeleteTime");
-
-                    b.Property<Guid?>("DeleterId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DeleterId");
 
                     b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("Data.Domain.Messege", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
-                    b.Property<Guid>("ChatId");
+                    b.Property<byte[]>("ChatId")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
                     b.Property<string>("Context")
                         .IsRequired();
 
                     b.Property<DateTime>("CreationDateTime");
 
-                    b.Property<DateTime?>("DeleteTime");
+                    b.Property<byte[]>("ReciverId")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
-                    b.Property<Guid?>("DeleterId");
-
-                    b.Property<Guid>("ReciverId");
-
-                    b.Property<Guid>("SenderId");
+                    b.Property<byte[]>("SenderId")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
-
-                    b.HasIndex("DeleterId");
 
                     b.HasIndex("ReciverId");
 
@@ -74,39 +67,33 @@ namespace Web.Migrations
 
             modelBuilder.Entity("Data.Domain.User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("ChatId");
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
                     b.Property<DateTime>("CreationDateTime");
-
-                    b.Property<DateTime?>("DeleteTime");
-
-                    b.Property<Guid?>("DeleterId");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("DeleterId")
-                        .IsUnique()
-                        .HasFilter("[DeleterId] IS NOT NULL");
-
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Data.Domain.UserChat", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
-                    b.Property<Guid>("ChatId");
+                    b.Property<byte[]>("ChatId")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
-                    b.Property<Guid>("UserId");
+                    b.Property<byte[]>("UserId")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
                     b.HasKey("Id");
 
@@ -117,13 +104,6 @@ namespace Web.Migrations
                     b.ToTable("UserChat");
                 });
 
-            modelBuilder.Entity("Data.Domain.Chat", b =>
-                {
-                    b.HasOne("Data.Domain.User", "Deleter")
-                        .WithMany()
-                        .HasForeignKey("DeleterId");
-                });
-
             modelBuilder.Entity("Data.Domain.Messege", b =>
                 {
                     b.HasOne("Data.Domain.Chat", "Chat")
@@ -131,31 +111,15 @@ namespace Web.Migrations
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Data.Domain.User", "Deleter")
-                        .WithMany()
-                        .HasForeignKey("DeleterId");
-
                     b.HasOne("Data.Domain.User", "Reciver")
                         .WithMany()
                         .HasForeignKey("ReciverId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Data.Domain.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Data.Domain.User", b =>
-                {
-                    b.HasOne("Data.Domain.Chat")
-                        .WithMany("Users")
-                        .HasForeignKey("ChatId");
-
-                    b.HasOne("Data.Domain.User", "Deleter")
-                        .WithOne()
-                        .HasForeignKey("Data.Domain.User", "DeleterId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Data.Domain.UserChat", b =>

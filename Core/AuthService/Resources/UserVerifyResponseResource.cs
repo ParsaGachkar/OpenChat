@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,7 +18,7 @@ namespace Core.AuthService.Resources
                     new Claim[]{
                         new Claim(CustomClaim.PhoneNumber,model.PhoneNumber)
                     }
-                ),
+                ),Expires=DateTime.UtcNow.AddYears(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Key)), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriber);

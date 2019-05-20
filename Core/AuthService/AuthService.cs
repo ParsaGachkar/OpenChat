@@ -48,13 +48,16 @@ namespace Core.AuthService
             {
                 if (phoneCodeDictionary[model.PhoneNumber] == model.Code)
                 {
-                    await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).Create(new User()
+                    var user = await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).ReadByPhone(model.PhoneNumber);
+                    if (user == null)
                     {
-                        CreationDateTime = DateTime.Now,
-                        DeleterId = null,
-                        PhoneNumber = model.PhoneNumber
-                    });
-                    await unitOfWork.Commit();
+                        await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).Create(new User()
+                        {
+                            CreationDateTime = DateTime.Now,
+                            PhoneNumber = model.PhoneNumber
+                        });
+                        await unitOfWork.Commit();
+                    }
                     phoneCodeDictionary.Remove(model.PhoneNumber);
                     return new UserVerifyResponseResource(model, this._authServiceConfig);
                 }

@@ -32,7 +32,7 @@ namespace Core.UserService
 
         public async Task<ICollection<ReadUserResource>> ReadAllUsers()
         {
-            return (await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).ReadAll()).Select(u => mapper.Map<ReadUserResource>(u)).ToArray();
+            return (await (await unitOfWork.GetRepository<UserRepository, User, Guid>()).ReadAll()).Select(u => mapper.Map<ReadUserResource>(u)).ToList();
         }
 
         public async Task<ReadUserResource> ReadUser(Guid Id)
