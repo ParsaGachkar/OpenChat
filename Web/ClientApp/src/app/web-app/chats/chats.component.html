@@ -39,8 +39,10 @@
         ایجاد چت جدید
       </button> -->
     </div>
-    <div *ngFor="let chat of Chats">
-      <nb-user name="{{chat.id}}" picture="{{'https://api.adorable.io/avatars/285/'+chat.id}}"></nb-user>
+    <div style="padding-top: 2em;">
+      <div *ngFor="let chat of Chats" (click)="SelectChat(chat);" style="cursor: pointer;">
+        <nb-user name="{{chat.userId}}" picture="{{'https://api.adorable.io/avatars/285/'+chat.userId}}"></nb-user>
+      </div>
     </div>
     <nb-sidebar-footer>
 
@@ -60,9 +62,11 @@
       </div>
     </div>
     <div *ngIf="SelectedChat">
-      <nb-chat [size]="'xxlarge'">
-        
-        <nb-chat-form></nb-chat-form>
+      <nb-chat [size]="'xxlarge'" [status]="'primary'">
+
+        <nb-chat-message *ngFor="let chat of ChatData" [type]="'text'" [message]="chat.context"
+          [date]="chat.creationDateTime" [sender]="chat.senderId" [avatar]="'https://api.adorable.io/avatars/285/'+chat.senderId"></nb-chat-message>
+        <nb-chat-form (send)="Send($event);"></nb-chat-form>
       </nb-chat>
     </div>
   </nb-layout-column>

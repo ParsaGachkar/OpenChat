@@ -22,8 +22,19 @@ namespace Core.ChatService
         public async Task<ICollection<ChatReadResource>> GetChats(ReadChatResource model)
         {
             var chatRepository = await unitOfWork.GetRepository<ChatRepository, Chat, Guid>();
+            var messegeRepository = await unitOfWork.GetRepository<MessegeRepository, Messege, Guid>();
             IEnumerable<Chat> chats = (await chatRepository.GetChats(model.currentUserId)) ?? new Collection<Chat>();
-            return chats.Select(c => mapper.Map<ChatReadResource>(c)).ToList();
+            List<ChatReadResource> list = chats.Select( q =>
+            {
+                return new ChatReadResource()
+                {
+                    Id = q.Id,
+                    UserId = (messegeRepository.MessegesFor(q.Id).Result).SelectMany(m=>new [] {m.SenderId,m.ReciverId}).First(w=>w != model.currentUserId)
+                };
+
+            }).ToList();
+
+            return list;
         }
 
         public async Task<ICollection<MessegeReadResource>> GetMesseges(ChatReadResource model)
@@ -39,7 +50,7 @@ namespace Core.ChatService
         {
             var chatRepository = await unitOfWork.GetRepository<ChatRepository, Chat, Guid>();
             var messegeRepository = await unitOfWork.GetRepository<MessegeRepository, Messege, Guid>();
-            var userRepository = await unitOfWork.GetRepository<UserRepository,User,Guid>();
+            var userRepository = await unitOfWork.GetRepository<UserRepository, User, Guid>();
             Chat chat = await chatRepository.GetChatFor(model.SenderId, model.ReciverId);
             if (chat == null)
             {
@@ -69,7 +80,7 @@ namespace Core.ChatService
 
     public class ReadChatResource
     {
-        public Guid selectedUserId{get;set;}
-        public Guid currentUserId{get;set;}
+        public Guid selectedUserId { get; set; }
+        public Guid currentUserId { get; set; }
     }
 }
