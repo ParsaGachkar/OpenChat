@@ -21,6 +21,8 @@ using Microsoft.IdentityModel.Tokens;
 using Web.Controllers;
 using AutoMapper;
 using Core.Mapping;
+using Core.KevenegarSmsService;
+using Core.KevenegarSmsService.Configuration;
 
 namespace Web
 {
@@ -31,7 +33,7 @@ namespace Web
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+                public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -39,6 +41,7 @@ namespace Web
             // Configurations
             var authConfig = Configuration.GetSection("Auth").Get<AuthServiceConfig>();
             services.Configure<AuthServiceConfig>(Configuration.GetSection("Auth"));
+            services.Configure<KavenegarConfiguration>(Configuration.GetSection("Kavenegar"));
             //Auth
             services.AddAuthentication(config =>
             {
@@ -65,7 +68,7 @@ namespace Web
             //Services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<ISmsService, SmsService>();
+            services.AddTransient<ISmsService, KavenegarService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IChatService, ChatService>();
             //Mapper
