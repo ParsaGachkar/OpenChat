@@ -2,15 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:open_chat/LoginPage.dart';
 import 'Services/UserService.dart';
 import 'MainPage.dart';
+import 'package:flutter/services.dart';
+
+
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
+
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _Main();
+  }
+}
+
+class _Main extends State<MyApp>{
+  UserService _userService;
+  String _token;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _userService = UserService();
+    _userService.getToken().then((token){
+      setState(() {
+        _token = token;
+      });
+    });
+    super.initState();
+
+  }
+  @override
   Widget build(BuildContext context) {
-    UserService userService = UserService();
-    var token = userService.getToken();
-    if(token == ""){
+
+    if(_token == ""){
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Open Chat',
@@ -54,6 +81,7 @@ class MyApp extends StatelessWidget {
 
     }
   }
+
 }
 
 class MyHomePage extends StatefulWidget {

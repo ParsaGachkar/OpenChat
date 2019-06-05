@@ -51,13 +51,14 @@ class UserService {
     return parsedResponse.token;
   }
 
-  Future<String> getAuthHeaders() async {
-    return "Bearer ${await getToken()}";
+   Future<Map<String,String>> getAuthHeaders() async {
+    var header = {HttpHeaders.authorizationHeader: "Bearer ${await getToken()}"};
+    return header;
   }
 
   Future<UserInfoResponse> getUserInfo() async {
     var resp =
-        await http.get(AppSettings.Url + "api/user", headers: getAuthHeaders());
+        await http.get(AppSettings.Url + "api/user", headers: await getAuthHeaders());
     CheckStatusCode(resp);
     UserInfoResponse parsedUserInfo =
         UserInfoResponse.fromJson(json.decode(resp.body));

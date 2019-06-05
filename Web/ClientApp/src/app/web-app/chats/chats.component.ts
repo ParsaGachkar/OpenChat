@@ -8,6 +8,7 @@ import { NbMenuService, NbSidebarService, NbSearchService } from '@nebular/theme
 import { MessegeReadResource } from '../MessegeReadResource';
 import { IMessegeWriteResourceModel } from '../imessege-write-resource-model';
 
+import { from } from 'rxjs';
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
@@ -37,9 +38,8 @@ export class ChatsComponent implements OnInit {
     this.searchService.onSearchSubmit()
       .subscribe((data: any) => {
         this.userService.GetUserInfoSpecific(data.term as string, (user) => {
-          this.SelectedChat = {
-            id: user.id
-          };
+          console.log("Send:"+JSON.stringify(user));
+          this.SelectChat({userId:user.id});
         });
 
       });
@@ -63,6 +63,7 @@ export class ChatsComponent implements OnInit {
   }
   SelectChat(chat: ChatReadResource) {
     this.SelectedChat = chat;
+    console.log(chat);
     this.ChatData = [];
     this.chatService.GetMesseges(chat, data => {
       this.ChatData = data;
@@ -72,6 +73,7 @@ export class ChatsComponent implements OnInit {
 
   Send(event: any){
     console.log(event);
+    console.log(this.SelectedChat);
     const messege = event.message;
     const model:IMessegeWriteResourceModel = {
       SenderId: this.User.id,
@@ -79,6 +81,7 @@ export class ChatsComponent implements OnInit {
       Context:messege
     };
     console.log(model);
+    console.log(JSON.stringify(model))
     this.chatService.SendMessege(model,()=>{
       this.SelectChat(this.SelectedChat);
     },error=>{})

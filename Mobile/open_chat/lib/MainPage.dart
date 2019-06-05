@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 import 'Services/UserService.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MainPageState();
+  }
+}
+
+class MainPageState extends State<MainPage> {
+  UserService _userService;
+  UserInfoResponse _userInfoResponse;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _userService = UserService();
+    _userService.getUserInfo().then((info) {
+      setState(() {
+        _userInfoResponse = info;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -17,17 +40,35 @@ class MainPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "GUID",
-                      textAlign: TextAlign.right,style: TextStyle(fontWeight: FontWeight.w800),
+                      (_userInfoResponse?.userId) ?? "Loading",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(fontWeight: FontWeight.w800),
                     ),
                   ),
                 ),
                 SizedBox(
                   child: ClipOval(
-                    child: Placeholder(
-                      color: Colors.black,
-                    ),
-                  ),
+                      child: Stack(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(color: Colors.black),
+                      ),
+                      Center(
+                        child: SizedBox(
+                          width: 64,
+                          height: 64,
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        ),
+                      ),
+                      _userInfoResponse == null?Container():Image(
+                        image: NetworkImage(
+                            "https://api.adorable.io/avatars/285/${_userInfoResponse?.userId}"),
+                      ),
+                    ],
+                  )),
                   width: 128,
                   height: 128,
                 ),
@@ -39,10 +80,23 @@ class MainPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      RawMaterialButton(child: Row(children: <Widget>[Expanded(child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text("جستجو برای چت جدید",textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w800,fontSize: 20),),
-                      ))],), onPressed: (){},),
+                      RawMaterialButton(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                                child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                "جستجو برای چت جدید",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800, fontSize: 20),
+                              ),
+                            ))
+                          ],
+                        ),
+                        onPressed: () {},
+                      ),
                       RawMaterialButton(
                         child: Row(
                           children: <Widget>[
@@ -65,7 +119,8 @@ class MainPage extends StatelessWidget {
                               height: 64,
                             ),
                           ],
-                        ), onPressed: (){},
+                        ),
+                        onPressed: () {},
                       ),
                     ],
                   ),

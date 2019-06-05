@@ -79,6 +79,7 @@ export class UserService {
   GetUserInfoSpecific(phone: string, Done?: (result: ReadUserResource) => void, Error?: (e: any) => void) {
     this.http.get(`/api/user/${phone}`, this.GetAuthHeader()).subscribe(data => {
       const parsedData = data as ReadUserResource;
+      console.log("Data:"+JSON.stringify(parsedData));
       if (Done) {
         Done(parsedData);
       }

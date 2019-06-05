@@ -1,5 +1,5 @@
 export interface ChatReadResource {
-  id: string;
+  id?: string;
 
   userId?:string;
 }
