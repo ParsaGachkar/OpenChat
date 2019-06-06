@@ -1,8 +1,26 @@
 # OpenChat
-simple chatting platform based on Asp.net Core 2.2, SignalR, Angular, Electron &amp; Flutter
+![Logo](ElectronDesktop\build\icon.png)
+Simple chatting platform based on Asp.net Core 2.2, SignalR, Angular, Electron &amp; Flutter
 
-[![Build Status](https://travis-ci.com/ParsaGachkar/OpenChat.svg?branch=master)](https://travis-ci.com/ParsaGachkar/OpenChat)
+## Using Open chat
+ There are several ways to use this project.
 
-نرم افزار چت مبتنی بر ASP.Net Core 2.2، SignalR، Angular، Electron و Flutter
+ * Simply use the Web Application by visiting [The Website](https://open-chat.liara.run)
+* Download and install one of clients available for each OS (Windows, Mac OS x, Linux, iOS, Android) from [Releases Page](https://github.com/ParsaGachkar/OpenChat/releases)
 
-این پروژه فقط یک نمونه کار هستش که سورسش رو به عنوان نمونه کار نشون بدم و هیچ مسئولیتی در قبال اینکه بقیه از این سورس کد استفاده میکنن قبول نمیکنم.
+## Warning
+:warning: I'm not taking any responsibility how the users are using this project. 
+> I'm just using this project to improve my resume .This is a public and OpenSource project and every one have access to it. Only the User him/her self is responsible for consciences usage of the service **nothing more**!
+
+## Road Map
+- [x] Domain & Database Design
+- [x] Api Design & Implementation
+- [x] WebApplication Implementation
+- [x] Desktop Application Implementation
+- [ ] Mobile Application Implementation *(Soon)*
+
+## :dollar: Donations
+If this project interests you, you can help it's development by donating. (or how do they say it? buy me a cup of coffee :coffee: cheers :smile:)
+
+
+ My bitcoin wallet address: 3Jwiw8jRrmioUG5gQcCxwZ6ZtFnNEyaJq4
