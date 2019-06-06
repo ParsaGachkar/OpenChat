@@ -1,5 +1,5 @@
 # OpenChat
-![Logo](ElectronDesktop\build\icon.png)
+![Logo](https://raw.githubusercontent.com/ParsaGachkar/OpenChat/master/ElectronDesktop/build/icon.png)
 Simple chatting platform based on Asp.net Core 2.2, SignalR, Angular, Electron &amp; Flutter
 
 ## Using Open chat
