@@ -4,8 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Parsa Gachkar",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^5.0.2"
+  },
+  "build": {
+    "appId": "com.parsagachkar.openchat.desktop",
+    "productName": "Open Chat Desktop Client",
+    "copyright": "Copyright © 2019 ${author}",
+    "win":{
+      "icon": "build/icon.ico"
+    },
+    "linux":{
+      "icon": "build/icon.png"
+    },
+    "mac":{
+      "icon": "build/icon.icns"
+    }
+  }
 }
