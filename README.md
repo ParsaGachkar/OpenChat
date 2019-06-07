@@ -20,7 +20,7 @@ Simple chatting platform based on Asp.net Core 2.2, SignalR, Angular, Electron &
 - [ ] Mobile Application Implementation *(Soon)*
 
 ## :dollar: Donations
-If this project interests you, you can help it's development by donating. (or how do they say it? buy me a cup of coffee :coffee: cheers :smile:)
+If this project interests you, you can help it's development by donating. (or how do they say it? buy me a cup of coffee :coffee: :smile:)
 
 
  My bitcoin wallet address: 3Jwiw8jRrmioUG5gQcCxwZ6ZtFnNEyaJq4
