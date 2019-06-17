@@ -38,6 +38,7 @@ RUN dotnet publish -c Release -o /build
 
 WORKDIR /build
 COPY entrypoint.sh /build/entrypoint.sh
+COPY deploydocker /build/dockerfile
 
 RUN chmod +x /build/entrypoint.sh
 
