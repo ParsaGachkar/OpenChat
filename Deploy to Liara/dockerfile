@@ -21,6 +21,8 @@ RUN apt-get update && \
 RUN npm i -g @liara/cli
 # End Setup
 
+RUN echo "LIARA API KEY" $LIARA_IR_API_KEY
+
 ADD ../ /src
 
 WORKDIR /src/Web
