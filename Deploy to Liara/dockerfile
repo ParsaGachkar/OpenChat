@@ -21,7 +21,7 @@ RUN apt-get update && \
 RUN npm i -g @liara/cli
 # End Setup
 
-ADD .. /src
+ADD ../ /src
 
 WORKDIR /src/Web
 
