@@ -4,5 +4,5 @@ workflow "Build and deploy on push" {
 }
 
 action "Deploy To Liara" {
-  uses = "ParsaGachkar/OpenChat/Deploy to Liara@builder"
+  uses = "./Deploy to Liara/"
 }
