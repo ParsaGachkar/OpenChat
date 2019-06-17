@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS builder
 
 LABEL "com.github.actions.name"="Build & Deploy To Liara"
 LABEL "com.github.actions.description"="just builds and deploys to liara.ir"
@@ -22,9 +22,13 @@ RUN npm i -g @liara/cli
 # End Setup
 
 RUN echo Env Vars
-Run printenv
+RUN printenv
 
 COPY . /src
+
+WORKDIR /src/Web/ClientApp
+
+RUN npm i
 
 WORKDIR /src/Web
 
@@ -34,7 +38,7 @@ RUN dotnet publish -c Release -o /build
 
 WORKDIR /build
 
-Run ls
+RUN ls
 
-Run liara deploy -p open-chat -port 80 --api-token=$LIARA_IR_API_KEY
+RUN liara deploy -p open-chat -port 80 --api-token=$LIARA_IR_API_KEY
 
