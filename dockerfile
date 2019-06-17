@@ -37,6 +37,8 @@ RUN mkdir /build
 RUN dotnet publish -c Release -o /build
 
 WORKDIR /build
+RUN ls
+
 COPY entrypoint.sh /build/entrypoint.sh
 COPY deploydocker /build/dockerfile
 
