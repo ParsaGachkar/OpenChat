@@ -1,0 +1,42 @@
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-Thin.woff");
+    font-weight: 200;
+}
+
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-ExtraLight.woff");
+    font-weight: 300;
+}
+
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-Medium.woff");
+    font-weight: 400;
+}
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-SemiBold.woff");
+    font-weight: 500;
+}
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-ExtraBold.woff");
+    font-weight: 600;
+}
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-UltraBold.woff");
+    font-weight: 700;
+}
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-Black.woff");
+    font-weight: 800;
+}
+@font-face{
+    font-family: "Anjoman";
+    src: url("Anjoman-Heavy.woff");
+    font-weight: 900;
+}
