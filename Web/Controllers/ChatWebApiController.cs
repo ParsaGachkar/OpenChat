@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Core.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Core.AuthService.Resources;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Web.Controllers
 {
@@ -47,15 +48,18 @@ namespace Web.Controllers
                 return BadRequest();
             }
             await _chatService.SendMessege(model);
+            await chatHub.Clients.Client((await _userService.ReadUser(model.ReciverId)).PhoneNumber)?.SendAsync("MessageRecive",model.Context);
             return Ok();
         }
         private readonly IChatService _chatService;
         private readonly IUserService _userService;
+        private readonly IHubContext<ChatHub> chatHub;
 
-        public ChatWebApiController(IChatService chatService, IUserService userService)
+        public ChatWebApiController(IChatService chatService, IUserService userService,IHubContext<ChatHub> chatHub)
         {
             _chatService = chatService;
             _userService = userService;
+            this.chatHub = chatHub;
         }
     }
 }

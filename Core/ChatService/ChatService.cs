@@ -37,11 +37,11 @@ namespace Core.ChatService
             return list;
         }
 
-        public async Task<ICollection<MessegeReadResource>> GetMesseges(ChatReadResource model)
+        public async Task<ICollection<MessageReadResource>> GetMesseges(ChatReadResource model)
         {
             MessegeRepository messegeRepository = await unitOfWork.GetRepository<MessegeRepository, Messege, Guid>();
             ICollection<Messege> messeges = await messegeRepository.MessegesFor(model.Id) ?? new Collection<Messege>();
-            return (messeges.Select(m => mapper.Map<MessegeReadResource>(m))).ToList();
+            return (messeges.Select(m => mapper.Map<MessageReadResource>(m))).ToList();
         }
 
 

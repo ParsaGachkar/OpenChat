@@ -1,5 +1,7 @@
 import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
+import 'package:open_chat/Models/Chat.dart';
+import 'package:open_chat/Models/Message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -65,6 +67,15 @@ class UserService {
     return parsedUserInfo;
   }
 
+  Future<UserInfoResponse> getUserSpecificInfo(String id) async {
+    var resp =
+    await http.get(AppSettings.Url + "api/user/$id", headers: await getAuthHeaders());
+    CheckStatusCode(resp);
+    UserInfoResponse parsedUserInfo =
+    UserInfoResponse.fromJson(json.decode(resp.body));
+    return parsedUserInfo;
+  }
+
   void CheckStatusCode(resp) {
     if (resp.statusCode != 200) {
       throw new Exception("Server Returned somthing other than 200");
@@ -73,13 +84,36 @@ class UserService {
   Future<Chat> GetChats() async{
     var resp =
     await http.get(AppSettings.Url + "api/user", headers: await getAuthHeaders());
+    CheckStatusCode(resp);
+    //Chat parsedChat =
+    //Chat.fromJson(json.decode(resp.body));
+    //return parsedChat;
+    //Todo: implement This
   }
+
+  Future<List<Message>> GetMessagesForChat(Chat chat) async{
+    var resp =
+    await http.get(AppSettings.Url + "api/user", headers: await getAuthHeaders());
+    CheckStatusCode(resp);
+    //Chat parsedChat =
+    //Chat.fromJson(json.decode(resp.body));
+    //return parsedChat;
+    //Todo: implement This
+  }
+
+  Future<void> SendMessege() async{
+    var resp =
+        await http.get(AppSettings.Url + "api/user", headers: await getAuthHeaders());
+    CheckStatusCode(resp);
+    //Todo: implement This
+  }
+
+
 }
 
 
 
-class Chat {
-}
+
 
 class VerificationResponse {
   String token;

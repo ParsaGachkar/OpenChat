@@ -5,7 +5,7 @@ using Data.Domain;
 
 namespace Core.ChatService.Resources
 {
-    public class MessegeReadResource
+    public class MessageReadResource
     {
         public Guid Id { get; set; }
         public DateTime CreationDateTime { get; set; }

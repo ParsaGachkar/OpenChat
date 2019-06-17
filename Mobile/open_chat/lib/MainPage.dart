@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Services/UserService.dart';
+import 'package:open_chat/Services/UserService.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -23,6 +23,10 @@ class MainPageState extends State<MainPage> {
       });
     });
     super.initState();
+  }
+
+  List<Widget> GetChats(){
+
   }
 
   @override

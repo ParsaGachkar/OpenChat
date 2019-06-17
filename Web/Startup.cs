@@ -38,6 +38,9 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var KavenegarKey = Environment.GetEnvironmentVariable("OpenChat_Kavenegar");
+            var JwtEncryption = Environment.GetEnvironmentVariable("OpenChat_JWT_Encryption");
+            var MySqlConnectionString = Environment.GetEnvironmentVariable("OpenChat_MySqlConnectionString");
             // Configurations
             var authConfig = Configuration.GetSection("Auth").Get<AuthServiceConfig>();
             services.Configure<AuthServiceConfig>(Configuration.GetSection("Auth"));
@@ -64,11 +67,11 @@ namespace Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //DbContexts
             var connectionString = Configuration.GetConnectionString("Default");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString, b => b.MigrationsAssembly("Web")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(MySqlConnectionString, b => b.MigrationsAssembly("Web")));
             //Services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<ISmsService, KavenegarService>();
+            services.AddTransient<IAuthService, AuthService>(p=>new AuthService(JwtEncryption,p.GetService<IUserService>(),p.GetService<IMapper>(),p.GetService<ISmsService>(),p.GetService<IUnitOfWork>()));
+            services.AddTransient<ISmsService, KavenegarService>(p=>new KavenegarService(KavenegarKey));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IChatService, ChatService>();
             //Mapper

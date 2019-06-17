@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'Helpers/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-import 'Services/UserService.dart';
+import 'package:open_chat/Services/UserService.dart';
 import 'MainPage.dart';
 
 class LoginPage extends StatefulWidget {

@@ -9,8 +9,10 @@ using Microsoft.Extensions.Options;
 
 namespace Core.KevenegarSmsService {
     public class KavenegarService : ISmsService {
+        private readonly string key;
+
         public async Task Send (SmsResource model) {
-            string url = $"https://api.kavenegar.com/v1/{Config.Value.ApiKey}/sms/send.json";
+            string url = $"https://api.kavenegar.com/v1/{this.key}/sms/send.json";
             var httpClient = new HttpClient();
             var content = new FormUrlEncodedContent(new []{
                 new KeyValuePair<string,string>("receptor",model.PhoneNumber),
@@ -21,11 +23,10 @@ namespace Core.KevenegarSmsService {
                 throw new System.Exception(await resp.Content.ReadAsStringAsync());
             }
         }
-        public IOptions<KavenegarConfiguration> Config { get; }
+        
 
-        public KavenegarService (IOptions<KavenegarConfiguration> config) {
-            this.Config = config;
-
+        public KavenegarService (string key) {
+            this.key = key;
         }
     }
 }

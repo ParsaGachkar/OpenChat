@@ -38,7 +38,7 @@
 
           <nb-card>
             <div style="padding: 0.5em; font-size: 1.5em">
-              <button class="btn btn-dark btn-block btn-lg">
+              <button class="btn btn-dark btn-block btn-lg" (click)="GotoSourceCode()">
                 <b>
                   <i class="fab fa-github fa-2x" style="vertical-align: middle;"></i> دسترسی به سورس کد
                 </b>
@@ -50,7 +50,7 @@
               </button>
               <br />
               <div class="btn-group btn-group-sm col-12" dir="ltr">
-                <button class="btn btn-dark">
+                <button class="btn btn-dark" (click)="GotoReleases()">
                   <div dir="rtl">
                     <div style="align-content: center;">
                       <i class="fab fa-apple fa-3x"></i>
@@ -58,7 +58,7 @@
                     دریافت نسخه MacOs نرم افزار
                   </div>
                 </button>
-                <button class="btn btn-secondary">
+                <button class="btn btn-secondary" (click)="GotoReleases()">
                   <div dir="rtl">
                     <div style="align-content: center;">
                       <i class="fab fa-windows fa-3x"></i>
@@ -66,7 +66,7 @@
                     دریافت نسخه Microsoft Windows نرم افزار
                   </div>
                 </button>
-                <button class="btn btn-light">
+                <button class="btn btn-light" (click)="GotoReleases()">
                   <div dir="rtl">
                     <div style="align-content: center;">
                       <i class="fab fa-linux fa-3x"></i>

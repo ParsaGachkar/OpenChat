@@ -16,4 +16,11 @@ export class HomeComponent implements OnInit {
   GotoWebApp() {
     this.router.navigate(['/WebApp']);
   }
+
+  GotoSourceCode(){
+    window.location.href = 'https://github.com/ParsaGachkar/OpenChat/'
+  }
+  GotoReleases(){
+    window.location.href = 'https://github.com/ParsaGachkar/OpenChat/releases'
+  }
 }

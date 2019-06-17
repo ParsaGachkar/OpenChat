@@ -10,7 +10,7 @@ namespace Core.ChatService
     {
         
         Task<ICollection<ChatReadResource>> GetChats(ReadChatResource model);
-        Task<ICollection<MessegeReadResource>> GetMesseges(ChatReadResource model);
+        Task<ICollection<MessageReadResource>> GetMesseges(ChatReadResource model);
         Task SendMessege(MessegeWriteResource model);
     }
 }

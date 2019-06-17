@@ -19,7 +19,7 @@ namespace Core.Mapping
             CreateMap<ChatReadResource, Chat>().ReverseMap();
 
             CreateMap<MessegeDeleteResource, Messege>().ReverseMap();
-            CreateMap<MessegeReadResource, Messege>().ReverseMap();
+            CreateMap<MessageReadResource, Messege>().ReverseMap();
             CreateMap<MessegeUpdateResource, Messege>().ReverseMap();
             CreateMap<MessegeWriteResource, Messege>().ReverseMap();
 

@@ -9,7 +9,7 @@ namespace Core.AuthService.Resources
     public class UserVerifyResponseResource
     {
         public string Token { get; set; }
-        public UserVerifyResponseResource(UserVerifyResource model, Core.AuthService.Config.AuthServiceConfig config)
+        public UserVerifyResponseResource(UserVerifyResource model, string key)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriber = new SecurityTokenDescriptor()
@@ -19,7 +19,7 @@ namespace Core.AuthService.Resources
                         new Claim(CustomClaim.PhoneNumber,model.PhoneNumber)
                     }
                 ),Expires=DateTime.UtcNow.AddYears(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Key)), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriber);
             Token = tokenHandler.WriteToken(token);

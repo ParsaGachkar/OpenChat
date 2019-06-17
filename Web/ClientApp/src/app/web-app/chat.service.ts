@@ -21,7 +21,7 @@ export class ChatService {
         if (Error) { Error(error); }
       });
   }
-  GetMesseges(model: IChatReadResourceModel, Done?: (result: Array<MessegeReadResource>) => void, Error?: (e: any) => void) {
+  GetMesseges(model: ChatReadResource, Done?: (result: Array<MessegeReadResource>) => void, Error?: (e: any) => void) {
     this.http.get(`${this.route}/messeges/${model.id}`, this.userService.GetAuthHeader())
       .subscribe(data => {
         if (Done) { Done(data as Array<MessegeReadResource>); }

@@ -11,9 +11,9 @@ namespace Web.Controllers
     {
         private readonly UserService userService;
 
-        public async Task SendMessege(MessegeReadResource messege)
+        public async Task SendMessage(MessageReadResource message)
         {
-            await Clients.Client((await userService.ReadUser(messege.ReciverId)).PhoneNumber).SendAsync("MessegeRecive", messege);
+            await Clients.Client((await userService.ReadUser(message.ReciverId)).PhoneNumber).SendAsync("MessageRecive", message);
         }
         public ChatHub(UserService userService)
         {
