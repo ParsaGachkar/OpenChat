@@ -37,9 +37,9 @@ RUN mkdir /build
 RUN dotnet publish -c Release -o /build
 
 WORKDIR /build
-COPY entrypoint.sh /build
+COPY entrypoint.sh /build/entrypoint.sh
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x /build/entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "/build/entrypoint.sh" ]
 
