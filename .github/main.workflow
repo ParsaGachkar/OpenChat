@@ -4,5 +4,5 @@ workflow "Build and deploy on push" {
 }
 
 action "GitHub Action for npm" {
-  uses = "ParsaGachkar/OpenChat/Deploy To Liara@builder"
+  uses = "ParsaGachkar/OpenChat/Deploy to Liara@builder"
 }
