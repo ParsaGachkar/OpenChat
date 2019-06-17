@@ -4,5 +4,6 @@ workflow "Build and deploy on push" {
 }
 
 action "Deploy To Liara" {
-  uses = "./Deploy to Liara/"
+  uses = "./."
+  secrets = ["LIARA_IR_API_KEY"]
 }
