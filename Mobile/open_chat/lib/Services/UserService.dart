@@ -70,6 +70,15 @@ class UserService {
       throw new Exception("Server Returned somthing other than 200");
     }
   }
+  Future<Chat> GetChats() async{
+    var resp =
+    await http.get(AppSettings.Url + "api/user", headers: await getAuthHeaders());
+  }
+}
+
+
+
+class Chat {
 }
 
 class VerificationResponse {
