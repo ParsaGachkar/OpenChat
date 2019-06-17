@@ -23,7 +23,7 @@ RUN npm i -g @liara/cli
 
 RUN echo "LIARA API KEY" $LIARA_IR_API_KEY
 
-ADD ../ /src
+COPY ../ /src
 
 WORKDIR /src/Web
 
