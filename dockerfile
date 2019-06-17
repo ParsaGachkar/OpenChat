@@ -40,5 +40,5 @@ WORKDIR /build
 
 RUN ls
 
-RUN liara deploy -p open-chat --port=80 --api-token=$LIARA_IR_API_KEY
+ENTRYPOINT [ "entrypoint.sh" ]
 
