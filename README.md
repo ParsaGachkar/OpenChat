@@ -1,4 +1,7 @@
 # OpenChat
+
+[![Join the chat at https://gitter.im/OpenChat-Parsa/community](https://badges.gitter.im/OpenChat-Parsa/community.svg)](https://gitter.im/OpenChat-Parsa/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![Logo](https://raw.githubusercontent.com/ParsaGachkar/OpenChat/master/ElectronDesktop/build/icon.png)
 Simple chatting platform based on Asp.net Core 2.2, SignalR, Angular, Electron &amp; Flutter
 
