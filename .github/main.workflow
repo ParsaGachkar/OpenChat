@@ -1,6 +1,6 @@
 workflow "Build and deploy on push" {
   on = "push"
-  resolves = ["GitHub Action for npm"]
+  resolves = ["Deploy To Liara"]
 }
 
 action "Deploy To Liara" {
