@@ -9,5 +9,5 @@ action "Deploy To Liara" {
 }
 
 action "Build Android" {
-  uses = "./Mobile/."
+  uses = "./Mobile/android.dockerfile"
 }
