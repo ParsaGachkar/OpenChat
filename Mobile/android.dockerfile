@@ -1,0 +1,14 @@
+FROM mingc/android-build-box
+COPY . /src
+WORKDIR /tools
+RUN sudo apt update 
+RUN sudo apt upgrade
+RUN wget https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.5.4-hotfix.2-stable.tar.xz
+RUN tar xf ./flutter_linux_v1.5.4-hotfix.2-stable.tar.xz
+RUN mv flutter_linux_v1.5.4-hotfix.2-stable /flutter
+RUN export PATH="$PATH:/flutter/bin"
+RUN flutter doctor
+COPY android-build.sh .
+RUN chmod +x ./android-build.sh
+WORKDIR /src
+ENTRYPOINT [ "/tools/android.sh" ]
